@@ -74,7 +74,7 @@ def tsakonian(request, entry):
         paradigm = results[0].paradigm
         if paradigm:
             # Read paradigm master table
-            filepath = '../data/tables/paradigms.xlsx'
+            filepath = 'data/tables/paradigms.xlsx'
             paradigm_master = pd.read_excel(filepath).set_index('paradigm')
 
             # Perform declension
