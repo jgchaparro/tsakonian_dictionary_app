@@ -27,6 +27,10 @@ parameters = {pair.split('=')[0] : pair.split('=')[1] for pair in connection_str
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'TsakonianDB.sqlite3',
+    },
+    'postgresql': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': parameters['dbname'],
         'HOST' : parameters['host'],
