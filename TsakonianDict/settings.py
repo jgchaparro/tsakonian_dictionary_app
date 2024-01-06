@@ -129,4 +129,4 @@ STATIC_URL = '/dictionary/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Adding a comment to see if this is reflected in the Azure deployment
+# Adding a comment to see if this is reflected in the Azure deploymen
