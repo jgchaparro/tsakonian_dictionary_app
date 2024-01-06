@@ -38,4 +38,3 @@ DATABASES = {
 #         'USER' : parameters['user'],
 #         'PASSWORD' : parameters['password'],
 #     }
-# 
