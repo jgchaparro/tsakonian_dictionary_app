@@ -28,14 +28,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'TsakonianDB.sqlite3',
-    },
-    'postgresql': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': parameters['dbname'],
-        'HOST' : parameters['host'],
-        'USER' : parameters['user'],
-        'PASSWORD' : parameters['password'],
     }
 }
-
-# Adding a comment to see if this is reflected in the Azure deployment
+# ,
+#     'postgresql': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': parameters['dbname'],
+#         'HOST' : parameters['host'],
+#         'USER' : parameters['user'],
+#         'PASSWORD' : parameters['password'],
+#     }
+# 
