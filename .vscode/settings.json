@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/e3d2aa2a-ce2f-429e-a72e-bfbda65024fa/resourceGroups/tsakonian_app_resource_group/providers/Microsoft.Web/sites/tsakoniandictionary",
-    "appService.deploySubpath": "."
-}
