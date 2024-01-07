@@ -14,8 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent # original
-BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Modified for Azure deployment
+BASE_DIR = Path(__file__).resolve().parent.parent # original
+# BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Modified for Azure deployment
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,10 @@ SECRET_KEY = 'django-insecure-=qmbw19)+^m653^vmtz3q0(ij)g!-p(day6s&g9(j2$utm%9i*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tsakoniandictionary.azurewebsites.net']
+ALLOWED_HOSTS = [
+    'tsakoniandictionary2.azurewebsites.net',
+    # 'tsakoniandictionary.azurewebsites.net',
+    ]
 
 
 # Application definition
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'TsakonianDict.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

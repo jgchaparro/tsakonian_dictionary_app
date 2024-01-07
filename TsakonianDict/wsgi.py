@@ -11,7 +11,11 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-settings_module = "TsakonianDict.deployment" if 'WEBSITE_HOSTNAME' in os.environ else 'TsakonianDict.settings'
+# Commenting out the following line used in complex method via GitHub:
+# settings_module = "TsakonianDict.deployment" if 'WEBSITE_HOSTNAME' in os.environ else 'TsakonianDict.settings'
+
+# Using simple method without GitHub:
+settings_module = "TsakonianDict.settings"
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
 
