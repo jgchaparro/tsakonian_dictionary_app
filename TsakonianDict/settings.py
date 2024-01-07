@@ -15,8 +15,6 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent # original
-# BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) # Modified for Azure deployment
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,8 +26,8 @@ SECRET_KEY = 'django-insecure-=qmbw19)+^m653^vmtz3q0(ij)g!-p(day6s&g9(j2$utm%9i*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'tsakoniandictionary2.azurewebsites.net',
-    # 'tsakoniandictionary.azurewebsites.net',
+    'tsakoniandictionary.azurewebsites.net',
+    # 'tsakoniandictionary2.azurewebsites.net',
     ]
 
 
