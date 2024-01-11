@@ -11,7 +11,7 @@ def perform_declension(word: str,
     Συμπυκνωμένη γραμματική της Τσακώνικης γλώσσας σε πίνακες
     """
 
-    if re.match(r'^[ΑΘΥ]([1-9])?$', paradigm) is None:
+    if re.match(r'^[ΑΘΥ]([0-9])?$', paradigm) is None:
         return {}
     
     # Create empty information dict
