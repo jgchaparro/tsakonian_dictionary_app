@@ -4,9 +4,14 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.shortcuts import redirect
 from .models import Entry
-from .src.perform_declension import perform_declension
+import dictionary.src.generate_notes
 import pandas as pd
 import numpy as np
+
+# Utils 
+from .src.perform_declension import perform_declension
+from .src.generate_notes import generate_notes
+
 
 # Create your views here.
  
@@ -69,7 +74,11 @@ def tsakonian(request, entry):
         "greek_list": greek_list,
     }
 
-    # Add the paradigm if exists
+    # If there is only one result, add the information on top of the page
+    if len(results) == 1:
+        context['top_info'] = True
+
+    # Add paradigm information if exists
     if results:
         paradigm = results[0].paradigm
         if paradigm:
@@ -83,6 +92,15 @@ def tsakonian(request, entry):
             # Update the context
             context.update(declination_dict)
 
+        # Add word type information if exists
+        notes = generate_notes(paradigm)
+        if notes:
+            context['notes'] = notes
+
+        # Print context for debug
+        print(context)
+        print(f'Paradigm: {paradigm}'
+              f'\nDeclination dict: {declination_dict}')
 
     return HttpResponse(template.render(context, request))
 
@@ -94,12 +112,15 @@ def greek(request, entry):
     greek = entry
 
     # Search for entries that contain the Greek word in the Greek column
-    reverse_results = Entry.objects.filter(greek__icontains = greek)
+    # reverse_results = Entry.objects.filter(greek__icontains = greek)
+    reverse_results = Entry.objects.filter(greek = greek)
 
     # If there are results, build a list with the following format:
     # Tsakonian word — Greek word
     if reverse_results:
        tsakonian_list = [f'{entry.tsakonian} — {entry.greek}' for entry in reverse_results]
+    #    tsakonian_list = [entry.tsakonian for entry in reverse_results]
+    #    greek_list = [entry.greek for entry in reverse_results]
     
     # Otherwise, return an empty list
     else:
@@ -108,6 +129,7 @@ def greek(request, entry):
     context = {
         "greek": greek,
         "tsakonian_list": tsakonian_list,
+        # "greek_list": greek_list
     }
 
     return HttpResponse(template.render(context, request))

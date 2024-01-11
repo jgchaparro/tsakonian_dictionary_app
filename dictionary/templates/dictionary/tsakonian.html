@@ -26,52 +26,28 @@
     </div>
   </form> 
   
-
   <div class="translation">
     <h1>{{ tsakonian }}</h1>
-    <center>[Gender, genitive and plural]</center>
-    <center>[IPA]</center>
-    <center>[Other information]</center>
-
-    {% if nom_plur %}
-    <table style="width: 300px; border-collapse: collapse; margin: auto; text-align: center;">
-      <colgroup>
-        <col style="width: 100px;">
-        <col style="width: 100px;">
-        <col style="width: 100px;">
-      </colgroup>
-      <tr>
-        <th>Κλίση</th>
-        <th>Ενικός</th>
-        <th>Πληθυντικός</th>
-      </tr>
-      <tr>
-        <td><b>Ονομαστική</b></td>
-        <td>{{ nom_sing }}</td>
-        <td>{{ nom_plur }}</td>
-      </tr>
-      <tr>
-        <td><b>Γενική</b></td>
-        <td>{{ gen_sing }}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><b>Αιτιατική</b></td>
-        <td>{{ acc_sing }}</td>
-        <td>{{ acc_plur }}</td>
-      </tr>
-    </table>
+    {% if top_info %}
+    <center>{% if gender %}<span style="color: blue; font-weight: bold">{{ gender }}</span>{% endif %}{% if plural %}, πλ. <span style="color: blue; font-weight: bold">{{ plural }}</span>{% endif %}</center>
+    {% if genitive_sing %} <center> Γενική {{ genitive_sing }}</center> {% endif %}
+    <!-- <center>[IPA]</center>  -->
     {% endif %}
-    
-    <h2>Μετάφραση στα Ελληνικά:</h2>
+
+    <!-- Show results if they exist -->
     {% if greek_list %}
-      {% for entry in greek_list %}
-        {% if entry.notes %}
-          <p>{{ forloop.counter }}) <small><em style="color: blue;">{{ entry.notes }}</em></small> {{ entry.greek }}</p>
-        {% else %}
+      {% for entry in greek_list %} 
+      <!-- If top info is activated, do not show notes -->
+        {% if top_info %}
           <p>{{ forloop.counter }}) {{ entry.greek }}</p>
+
+        <!-- If top info is not activated, show notes -->
+        {% else %}
+          <p>{{ forloop.counter }}) <small><em style="color: blue;">{{ entry.notes }}</em></small> {{ entry.greek }}</p>
         {% endif %}
       {% endfor %}
+
+    <!-- Show placeholder if there are no results -->
     {% else %}
       <p>Δεν βρέθηκε η λέξη στην βάση</p>
     {% endif %}
