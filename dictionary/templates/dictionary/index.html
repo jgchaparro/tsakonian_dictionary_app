@@ -26,6 +26,17 @@
       <input type="text" name="q" class="search-bar" placeholder="Αναζήτηση">
       <button type="submit">Υποβολή</button>
     </div>
+
+    <div class="letter-buttons">
+      <button onclick="pasteKh()">κ̇</button>
+      <button onclick="pasteTh()">τ̇</button>
+      <button onclick="pastePh()">π̇</button>
+      <button onclick="pasteNi()">ν̂</button>
+      <button onclick="pasteLi()">λ̣</button>
+      <button onclick="pasteSh()">σ̌</button>
+      <button onclick="pasteZh()">ζ̌</button>
+      <button onclick="pasteTs()">τ͡σ</button>
+    </div>
   </form> 
   
   <p>Αυτό το λεξικό αποτελεί μέρος των προσπαθειών συντήρησης της Τσακώνικης διαλέκτου. </p>
@@ -34,5 +45,62 @@
 
   </p>Αν θέλετε να συνεισφέρετε, παρακαλούμε επικοινωνήστε μαζί μας στο <a href="mailto:jgchaparro@outlook.com ">jgchaparro@outlook.com </a></p>
 
+  <!-- Scripts -->
+  <script>
+    function pasteSh() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "σ̌";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteZh() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "ζ̌";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteKh() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "κ̇";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteTh() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "τ̇";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pastePh() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "π̇";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteTs() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "τ͡σ";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteNi() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "ν̂";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
+  <script>
+    function pasteLi() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "λ̣";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
 </body>
 </html>

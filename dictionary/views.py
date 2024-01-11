@@ -92,15 +92,16 @@ def tsakonian(request, entry):
             # Update the context
             context.update(declination_dict)
 
-        # Add word type information if exists
-        notes = generate_notes(paradigm)
-        if notes:
-            context['notes'] = notes
+            # Add word type information if exists
+            notes = generate_notes(paradigm)
+            if notes:
+                context['notes'] = notes
 
         # Print context for debug
         print(context)
-        print(f'Paradigm: {paradigm}'
-              f'\nDeclination dict: {declination_dict}')
+        if paradigm:
+            print(f'Paradigm: {paradigm}'
+                f'\nDeclination dict: {declination_dict}')
 
     return HttpResponse(template.render(context, request))
 

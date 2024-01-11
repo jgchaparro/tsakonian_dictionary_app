@@ -9,6 +9,7 @@ body {
   
   .search-bar {
     margin-top: 10px;
+    font-size: 20px;
   }
   
   .search-bar input {
@@ -24,7 +25,21 @@ body {
     color: #fff;
     padding: 10px;
     border-radius: 10px;
+    font-size: 20px;
     /* float: right; */
+  }
+
+  .letter-buttons {
+    font-size: 30px;
+    text-align: center;
+    padding-top: 10px;
+  }
+  
+  .letter-buttons button {
+    font-family: Calibri;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 600;
   }
 
   h1, h2 {
@@ -51,4 +66,6 @@ body {
 
   .translation {
     font-size: 25px;
+
+  
 }
