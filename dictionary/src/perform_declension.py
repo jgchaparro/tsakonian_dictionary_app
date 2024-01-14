@@ -6,7 +6,7 @@ def perform_declension(word: str,
                        paradigm: str,
                        paradigm_master: pd.DataFrame) -> dict:
     """
-    This function extracts the gender and plural of a given word
+    This function extracts the gender and plural of a given noun
     based on the paradigm taxonomy described in the PDF
     Συμπυκνωμένη γραμματική της Τσακώνικης γλώσσας σε πίνακες
     """

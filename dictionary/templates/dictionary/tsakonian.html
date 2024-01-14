@@ -38,10 +38,21 @@
   
   <div class="translation">
     <h1>{{ tsakonian }}</h1>
+
+    
     {% if top_info %}
-    <center>{% if gender %}<span style="color: blue; font-weight: bold">{{ gender }}</span>{% endif %}{% if plural %}, πλ. <span style="color: blue; font-weight: bold">{{ plural }}</span>{% endif %}</center>
-    {% if gen_sing %} <center> Γεν. <span style="color: blue; font-weight: bold">{{ gen_sing }}</span></center> {% endif %}
-    <!-- <center>[IPA]</center>  -->
+      <!-- Verb -->
+      <center>{% if ending %} Κατάληξη <span style="color: blue; font-weight: bold">{{ ending }}</span>{% endif %}</center>
+      <center>{% if orist_aoristos %} Αόρ. ορισ. <span style="color: blue; font-weight: bold">{{ orist_aoristos }}</span>{% endif %}{% if ypot_aoristos %}, αόρ. υποτ. <span style="color: blue; font-weight: bold">{{ ypot_aoristos }}{% endif %}</span></center>
+      <center>{% if ypot_enestotas %} Υποτ. ενεσ. <span style="color: blue; font-weight: bold">{{ ypot_enestotas }}</span>{% endif %}</center>
+
+      <!-- Νoun -->
+      <center>{% if gender %}<span style="color: blue; font-weight: bold">{{ gender }}</span>{% endif %}{% if plural %}, πλ. <span style="color: blue; font-weight: bold">{{ plural }}</span>{% endif %}</center>
+      {% if gen_sing %} <center> Γεν. <span style="color: blue; font-weight: bold">{{ gen_sing }}</span></center> {% endif %}
+      <!-- <center>[IPA]</center>  -->
+
+      <!-- Adjective -->
+      <center>{% if forms %}<span style="color: blue; font-weight: bold">{{ forms }}</span>{% endif %}</center>   
     {% endif %}
 
     <!-- Show results if they exist -->

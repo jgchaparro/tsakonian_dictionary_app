@@ -10,6 +10,7 @@ import numpy as np
 
 # Utils 
 from .src.perform_declension import perform_declension
+from .src.perform_conjugation import perform_conjugation
 from .src.generate_notes import generate_notes
 
 
@@ -82,15 +83,45 @@ def tsakonian(request, entry):
     if results:
         paradigm = results[0].paradigm
         if paradigm:
-            # Read paradigm master table
-            filepath = 'data/tables/paradigms.xlsx'
-            paradigm_master = pd.read_excel(filepath).set_index('paradigm')
+            ### Verbs ###
+            if paradigm[0] == 'Ρ' and len(paradigm) > 2:
+                # Read paradigm master table
+                filepath = 'data/tables/paradigms_verbs.xlsx'
+                paradigm_master = pd.read_excel(filepath)
+                paradigm_master.set_index(['paradigm', 'ending'], inplace=True)
 
-            # Perform declension
-            declination_dict = perform_declension(results[0].tsakonian, paradigm, paradigm_master)
+                # Perform conjugation
+                conjugation_dict = perform_conjugation(results[0].tsakonian, paradigm, paradigm_master)
 
-            # Update the context
-            context.update(declination_dict)
+                # Update the context
+                context.update(conjugation_dict)
+                print(f'Conjugation: {conjugation_dict}')
+
+            ### Nouns ###
+            elif paradigm[0] in 'ΑΘΥ':
+                # Read paradigm master table
+                filepath = 'data/tables/paradigms_nouns.xlsx'
+                paradigm_master = pd.read_excel(filepath).set_index('paradigm')
+
+                # Perform declension
+                declination_dict = perform_declension(results[0].tsakonian, paradigm, paradigm_master)
+                print(f'Declination: {declination_dict}')
+
+                # Update the context
+                context.update(declination_dict)
+
+            ### Adjectives ###
+            elif paradigm[0] == 'Ε':
+                # Read paradigm master table
+                filepath = 'data/tables/paradigms_adjectives.xlsx'
+                paradigm_master = pd.read_excel(filepath).set_index('paradigm')
+
+                # Perform declension
+                declination_dict = {'forms' : paradigm_master.loc[paradigm, 'forms']}
+                print(f'Forms: {declination_dict}')
+
+                # Update the context
+                context.update(declination_dict)
 
             # Add word type information if exists
             notes = generate_notes(paradigm)
@@ -98,10 +129,7 @@ def tsakonian(request, entry):
                 context['notes'] = notes
 
         # Print context for debug
-        print(context)
-        if paradigm:
-            print(f'Paradigm: {paradigm}'
-                f'\nDeclination dict: {declination_dict}')
+        print(context)                
 
     return HttpResponse(template.render(context, request))
 
