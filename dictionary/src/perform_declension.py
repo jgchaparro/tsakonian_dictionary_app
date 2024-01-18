@@ -39,4 +39,23 @@ def perform_declension(word: str,
     except KeyError:
         pass
 
+    ### Add irregular feminine genitives ###
+    if info_dict['gender'] == 'η' and '0' not in paradigm:
+        femenine_genitives = paradigm_master[paradigm_master['type'] == 'femenine_genitives']
+        if word in femenine_genitives.index:
+            info_dict['gen_sing'] = femenine_genitives.loc[word, 'gen_sing']
+
+    ### Generate notes ###
+    # Create base
+    notes = info_dict['gender']
+
+    if 'plural' in info_dict.keys():
+        notes += f', πλ. {info_dict["plural"]}'
+    if 'gen_sing' in info_dict.keys():
+
+        notes += f', γεν. {info_dict["gen_sing"]}'
+
+    # Add notes to info_dict
+    info_dict['notes'] = notes
+
     return info_dict    

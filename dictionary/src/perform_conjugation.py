@@ -11,29 +11,48 @@ def perform_conjugation(verb: str,
 
     ### Irregular paradigms ###
     if paradigm == "Ρ0":
-        conjugation = paradigm_master.loc[(verb, 'irr')].dropna().to_dict()
-        return conjugation
+        conjugation_info = paradigm_master.loc[(verb, 'irr')].dropna().to_dict()
+
+    elif paradigm == "Ρ":
+        conjugation_info = {}        
     
-    ### Regular paradigms ###
-    # Get paradigm subset
-    paradigm_subset = paradigm_master.loc[paradigm]
+    else:
+        ### Regular paradigms ###
+        # Get paradigm subset
+        paradigm_subset = paradigm_master.loc[paradigm]
 
-    # Extract specific subset
-    endings_list = paradigm_subset.index.tolist()
+        # Extract specific subset
+        endings_list = paradigm_subset.index.tolist()
 
-    # Detect the ending
-    for ending_str in endings_list:
-        if verb.endswith(ending_str):
-            ending = ending_str
-            break
+        # Detect the ending
+        for ending_str in endings_list:
+            if verb.endswith(ending_str):
+                ending = ending_str
+                break
 
-    # Extract conjugation information
-    conjugation = paradigm_subset.loc[ending].dropna().to_dict()
+        # Extract conjugation information
+        conjugation_info = paradigm_subset.loc[ending].dropna().to_dict()
 
-    # Update conjugation with ending
-    conjugation['ending'] = f'-{ending}'
+        # Update conjugation with ending
+        conjugation_info['ending'] = f'-{ending}'
 
-    # Add word type
-    # conjugation['word_type'] = 'Ρήμα'
+    ### Generate notes ###
+    notes = ''
 
-    return conjugation
+    if 'orist_aoristos' in conjugation_info.keys():
+        notes += f'αόρ. {conjugation_info["orist_aoristos"]}'
+    if 'ypot_aoristos' in conjugation_info.keys():
+        notes += f', υπ. αόρ. {conjugation_info["ypot_aoristos"]}'
+    if 'metochi' in conjugation_info.keys():
+        notes += f', μετ. {conjugation_info["metochi"]}'
+    if 'ypot_enestotas' in conjugation_info.keys():
+        notes += f', υπ. ενεστ. {conjugation_info["ypot_enestotas"]}'
+    
+    # Create generic notes if no specific notes exist
+    if notes == '':
+        notes = 'ρήμα'
+
+    # Add notes to conjugation_info
+    conjugation_info['notes'] = notes
+
+    return conjugation_info

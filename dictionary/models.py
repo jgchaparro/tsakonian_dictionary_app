@@ -16,7 +16,6 @@ class Entry(models.Model):
     greek = models.CharField(max_length=200)
     paradigm = models.CharField(max_length=5)
     source = models.ForeignKey(Source, on_delete=models.CASCADE)
-    notes = models.CharField(max_length=30, blank=True, null=True)
     
     def __str__(self):
         return self.tsakonian
