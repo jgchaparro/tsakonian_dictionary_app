@@ -1,2 +1,0 @@
-- Recrear la base de datos con las notas nuevas
-- Si hay solo un tipo de palabra con la misma declinación, poner el género y plural arriba en el centro
