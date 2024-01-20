@@ -9,5 +9,5 @@ urlpatterns = [
     path("TS-EL/<str:entry>", views.tsakonian, name="tsakonian"),
     path("EL-TS/<str:entry>", views.greek, name="greek"),
     path("TS-EL/", views.tsakonian, name="tsakonian-general"),
-    path("writing-extension/", views.writing_extension, name="writing-extension"),
+    path("writing_extension/", views.writing_extension, name="writing_extension"),
 ]
