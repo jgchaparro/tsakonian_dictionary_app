@@ -20,7 +20,7 @@ def perform_declension(word: str,
     ### Gender ###
     gender_dict = {
         'Α' : 'o',
-        'Θ' : 'η',
+        'Θ' : 'α',
         'Υ' : 'το'
     }
     info_dict['gender'] = gender_dict[paradigm[0]]
@@ -40,7 +40,7 @@ def perform_declension(word: str,
         pass
 
     ### Add irregular feminine genitives ###
-    if info_dict['gender'] == 'η' and '0' not in paradigm:
+    if info_dict['gender'] == 'α' and '0' not in paradigm:
         femenine_genitives = paradigm_master[paradigm_master['type'] == 'femenine_genitives']
         if word in femenine_genitives.index:
             info_dict['gen_sing'] = femenine_genitives.loc[word, 'gen_sing']

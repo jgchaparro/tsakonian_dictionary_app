@@ -28,7 +28,8 @@
       <button onclick="pasteKh()">κ̇</button>
       <button onclick="pasteTh()">τ̇</button>
       <button onclick="pastePh()">π̇</button>
-      <button onclick="pasteNi()">ν̂</button>
+      <button onclick="pasteNi()">ν̇</button>
+      <button onclick="pasteNni()">ν̂</button>
       <button onclick="pasteLi()">λ̣</button>
       <button onclick="pasteSh()">σ̌</button>
       <button onclick="pasteZh()">ζ̌</button>
@@ -121,16 +122,23 @@
   <script>
     function pasteNi() {
       const searchBarInput = document.querySelector('input[name="q"]');
-      searchBarInput.value = searchBarInput.value + "ν̂";
+      searchBarInput.value = searchBarInput.value + "ν̇";
       event.preventDefault(); // Prevent form submission
     }
   </script>
-    <script>
-      function pasteLi() {
-        const searchBarInput = document.querySelector('input[name="q"]');
-        searchBarInput.value = searchBarInput.value + "λ̣";
-        event.preventDefault(); // Prevent form submission
-      }
-    </script>
+  <script>
+    function pasteNni() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "ν̂";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>  
+  <script>
+    function pasteLi() {
+      const searchBarInput = document.querySelector('input[name="q"]');
+      searchBarInput.value = searchBarInput.value + "λ̣";
+      event.preventDefault(); // Prevent form submission
+    }
+  </script>
 </body>
 </html>

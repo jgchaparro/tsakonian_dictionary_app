@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Τσακώνικο λεξικό</title>
+  <link rel="stylesheet" href="{% static 'dictionary/style.css' %}">
+</head>
+
+<body>
+  <h1>Τσακώνικο λεξικό</h1>
+
+  <h2>Επέκταση πληκτρολογίου για την Τσακωνική διάλεκτο</h2>
+
+<p>Η επέκταση επιτρέπει την εισαγωγή των χαρακτήρων της Τσακωνικής διάλεκτου σε ένα πληκτρολόγιο της Ελληνικής γλώσσας. Η επέκταση είναι διαθέσιμη για όλα τα καινούργια πληκτρολόγια της Ελληνικής γλώσσας που υποστηρίζουν την εισαγωγή πολυτονικών χαρακτήρων.</p>
+
+<p>Η επέκταση βασίζεται στην ορθογραφία της Τσακωνικής διάλεκτου που προτάθηκε από τον Ιωάννη Καμβύση στο βιβλίο του <i>Για να κ̇οντούμε τα γρούσσα νάμου</i> (Λεωνίδιο, 2020) και την εφαρμογή AutoHotKey.</p>
+
+<h2>Εγκατάσταση</h2>
+
+<ol>
+  <li>Κατεβάστε και εγκαταστήστε το AutoHotKey:
+    <ol>
+      <li> Από την <a href="https://www.autohotkey.com/">ιστοσελίδα της AutoHotKey</li>
+      <li> <a href="https://www.autohotkey.com/download/ahk-v2.exe">Πατήστε εδώ</a> για να κατεβάσετε απευθείας το αρχείο εγκατάστασης.</li>
+      </ol>
+  </li>
+  </br>
+  <li>Κατεβάστε την επέκταση από έναν από τους παρακάτω συνδέσμους:
+    <ol>
+      <li> <a href="https://drive.google.com/file/d/1PyQNma9OCCKOIY3AZ9z9L5aST-5OHzrq/view?usp=sharing">Google Drive</a></li>
+      <li> <a href="https://github.com/jgchaparro/TsakonianDB/blob/main/tsakonian_keyboard_extension/Tsakonian%20keyboard%20extension.ahk">GitHub</a></li>
+    </ol>
+  </li>
+  </br>
+  <li>Ανοίξτε το αρχείο επέκτασης.</li>
+</ol>
+
+
+<h2>Χρήση</h2>
+
+<p><b>Πρέπει να ανεργοποιήσετε την επέκταση κάθε φορά που ανενεργοποιείτε τον υπολογιστή διότι λειτουργή ως ξεχωριστό πρόγραμμα.</b></p>
+
+<p><b>Κατά κανόνα, γράψτε το επιθυμητό γράμμα και πατήστε το πλήκτρο "/" για να προσθέσετε διακριτικά.</b></p>
+
+<p>Οι χαρακτήρες της Τσακωνικής διάλεκτου εισάγονται με την παρακάτω αντιστοίχιση:</p>
+
+  <div style="text-align: center;">
+    <center>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">Εισαγωγή</th>
+          <th style="text-align: center;">Αποτέλεσμα</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;">σ + /</td>
+          <td style="text-align: center;"><b>σ̌</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ζ + /</td>
+          <td style="text-align: center;"><b>ζ̌</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">τ + /</td>
+          <td style="text-align: center;"><b>τ̇</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">π + /</td>
+          <td style="text-align: center;"><b>π̇</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">κ + /</td>
+          <td style="text-align: center;"><b>κ̇</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">μ + /</td>
+          <td style="text-align: center;"><b>μ̇</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ν + /</td>
+          <td style="text-align: center;"><b>ν̇</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">νι + /</td>
+          <td style="text-align: center;"><b>ν̂</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">λ + /</td>
+          <td style="text-align: center;"><b>λ̣</b></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">τσσ</td>
+          <td style="text-align: center;"><b>τ͡σ</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+  </div>
+  
+  <p>Η αντιστοίχιση με κεφαλαίους χαρακτήρες λειτουργεί επίσης.</p>
+
+<h2>Γιατί μία επέκταση πληκτρολογίου;</h2>
+
+<p>Παλιά, για την για τη δημιουργία προσαρμοσμένων διατάξεων πληκτρολογίου χρησιμοποιήθηκε το Microsoft Keyboard Layout Creator. Ωστόσο, η εφαρμογή αυτή δεν είναι συμβατή με τα Windows 11. Επομένως, αυτή η επέκταση με το AutoHotKey ήταν άνετη εναλλακτική λύση.</p>
+  
+</body>
+</html>

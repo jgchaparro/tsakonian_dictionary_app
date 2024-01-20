@@ -140,3 +140,12 @@ def search(request):
     # Otherwise, redirect to the entry page
     else:
         return redirect(f'/dictionary/{direction}/{query}')
+    
+def writing_extension(request):
+    # Load the template
+    template = loader.get_template("dictionary/writing_extension.html")
+
+    # Set the context
+    context = {}
+
+    return HttpResponse(template.render(context, request))
