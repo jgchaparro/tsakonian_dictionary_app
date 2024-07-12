@@ -45,6 +45,20 @@ def entry(request, entry):
 
     return HttpResponse(template.render(context, request))
 
+def search(request):
+    query = request.GET.get('q').strip().lower()
+    direction = request.GET.get('direction')
+    orthography = request.GET.get('orthography')
+    print(direction)
+
+    # If the request is empty, go back to the main page
+    if not request.GET.get('q'):
+        return redirect('/dictionary/')
+    
+    # Otherwise, redirect to the entry page
+    else:
+        return redirect(f'/dictionary/{direction}/{query}')
+
 def tsakonian(request, 
               entry,
               **kwargs):
@@ -114,7 +128,7 @@ def greek(request, entry):
     # If there are results, build a list with the following format:
     # Tsakonian word — Greek word
     if reverse_results:
-       tsakonian_list = [f'{entry.tsakonian} — {entry.greek}' for entry in reverse_results]
+       tsakonian_list = [f'{entry.nowakowski} — {entry.greek}' for entry in reverse_results]
     #    tsakonian_list = [entry.tsakonian for entry in reverse_results]
     #    greek_list = [entry.greek for entry in reverse_results]
     
@@ -129,20 +143,6 @@ def greek(request, entry):
     }
 
     return HttpResponse(template.render(context, request))
-
-def search(request):
-    # If the request is empty, go back to the main page
-    query = request.GET.get('q').strip().lower()
-    direction = request.GET.get('direction')
-    orthography = request.GET.get('orthography')
-    print(direction)
-
-    if not request.GET.get('q'):
-        return redirect('/dictionary/')
-    
-    # Otherwise, redirect to the entry page
-    else:
-        return redirect(f'/dictionary/{direction}/{query}')
     
 def writing_extension(request):
     # Load the template
