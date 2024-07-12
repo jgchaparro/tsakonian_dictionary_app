@@ -17,11 +17,9 @@ def index(request):
     template = loader.get_template("dictionary/index.html")
 
     # Set the context
-    latest_entries = Entry.objects.order_by("tsakonian")
     text_to_show = """
 Καούρ εκάνατε! Εγκείνι ενι το πρώκιου ηλεκτρονικό Τσακώνικο λεξικό!"""
     context = {
-        "latest_entries": latest_entries,
         "text_to_show": text_to_show,
     }
 
@@ -47,15 +45,20 @@ def entry(request, entry):
 
     return HttpResponse(template.render(context, request))
 
-def tsakonian(request, entry):
+def tsakonian(request, 
+              entry,
+              **kwargs):
     # Load the template
     template = loader.get_template("dictionary/tsakonian.html")
 
-    # Set the context
-    tsakonian_ = entry
-
     # Search for entries that contain the Greek word in the Greek column
-    results = Entry.objects.filter(tsakonian = tsakonian_)
+    # match ortography:
+    #     case "nowakowski":
+    #         results = Entry.objects.filter(nowakowski = entry)
+    #     case "kostakis":
+    #         results = Entry.objects.filter(kostakis = entry)
+
+    results = Entry.objects.filter(nowakowski = entry)
 
     # If there are results, build a list with the following format:
     # i. Greek word
@@ -69,7 +72,7 @@ def tsakonian(request, entry):
         greek_list = []
     
     context = {
-        "tsakonian" : tsakonian_,
+        "tsakonian" : entry,
         "greek_list": greek_list,
     }
 
@@ -79,18 +82,18 @@ def tsakonian(request, entry):
 
         # Extract word information
         if results[0].paradigm is not None:
-            word_info = extract_word_info(results[0].tsakonian, results[0].paradigm)
+            word_info = extract_word_info(entry, results[0].paradigm)
             context.update(word_info)
 
     elif len(results) > 1:
         # Generate notes for each entry
-        for entry in results:
-            if entry.paradigm is not None:
-                paradigm = entry.paradigm
-                word_info = extract_word_info(entry.tsakonian, paradigm)
+        for result in results:
+            if result.paradigm is not None:
+                paradigm = result.paradigm
+                word_info = extract_word_info(entry, paradigm)
                 print(word_info)
-                # Add notes to entry
-                entry.notes = word_info['notes']          
+                # Add notes to result
+                result.notes = word_info['notes']          
         
         # Print context for debug
         print(context)                
@@ -127,11 +130,11 @@ def greek(request, entry):
 
     return HttpResponse(template.render(context, request))
 
-        
 def search(request):
     # If the request is empty, go back to the main page
     query = request.GET.get('q').strip().lower()
     direction = request.GET.get('direction')
+    orthography = request.GET.get('orthography')
     print(direction)
 
     if not request.GET.get('q'):

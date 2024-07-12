@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path("dictionary/", include("dictionary.urls")),
     path('admin/', admin.site.urls),
+    path("", include("dictionary.urls")), # Redirect to dictionary
 ]

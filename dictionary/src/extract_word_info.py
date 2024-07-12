@@ -25,7 +25,7 @@ def extract_word_info(word: str,
     ### Nouns ###
     if word_type == 'noun':
         # Read paradigm master table
-        filepath = 'data/tables/paradigms_nouns.xlsx'
+        filepath = 'data/tables/Nouns.xlsx'
         paradigm_master = pd.read_excel(filepath).set_index('paradigm')
 
         # Perform declension
@@ -36,7 +36,7 @@ def extract_word_info(word: str,
 
     elif word_type == 'verb':
         # Read paradigm master table
-        filepath = 'data/tables/paradigms_verbs.xlsx'
+        filepath = 'data/tables/Verbs.xlsx'
         paradigm_master = pd.read_excel(filepath)
         paradigm_master.set_index(['paradigm', 'ending'], inplace=True)
 
@@ -49,7 +49,7 @@ def extract_word_info(word: str,
     ### Adjectives ###
     elif word_type == 'adjective':
         # Read paradigm master table
-        filepath = 'data/tables/paradigms_adjectives.xlsx'
+        filepath = 'data/tables/Adjectives.xlsx'
         paradigm_master = pd.read_excel(filepath).set_index('paradigm')
 
         # Perform declension
