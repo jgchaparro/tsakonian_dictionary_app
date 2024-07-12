@@ -52,7 +52,6 @@ def perform_declension(word: str,
     if 'plural' in info_dict.keys():
         notes += f', πλ. {info_dict["plural"]}'
     if 'gen_sing' in info_dict.keys():
-
         notes += f', γεν. {info_dict["gen_sing"]}'
 
     # Add notes to info_dict
