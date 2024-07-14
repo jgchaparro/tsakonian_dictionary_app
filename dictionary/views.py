@@ -122,15 +122,12 @@ def greek(request, entry):
     greek = entry
 
     # Search for entries that contain the Greek word in the Greek column
-    # reverse_results = Entry.objects.filter(greek__icontains = greek)
     reverse_results = Entry.objects.filter(greek = greek)
 
     # If there are results, build a list with the following format:
     # Tsakonian word — Greek word
     if reverse_results:
        tsakonian_list = [f'{entry.nowakowski} — {entry.greek}' for entry in reverse_results]
-    #    tsakonian_list = [entry.tsakonian for entry in reverse_results]
-    #    greek_list = [entry.greek for entry in reverse_results]
     
     # Otherwise, return an empty list
     else:
@@ -139,7 +136,6 @@ def greek(request, entry):
     context = {
         "greek": greek,
         "tsakonian_list": tsakonian_list,
-        # "greek_list": greek_list
     }
 
     return HttpResponse(template.render(context, request))
