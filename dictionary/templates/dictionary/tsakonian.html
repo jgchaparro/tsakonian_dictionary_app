@@ -29,14 +29,19 @@
 
         <!-- If top info is not activated, show notes -->
         {% else %}
-          <p>{{ forloop.counter }}) <small><em style="color: blue;">{{ entry.notes }}</em></small> {{ entry.greek }}</p>
+        <p>{{ forloop.counter }}) <small><em style="color: blue;">{{ entry.notes }}</em></small> {{ entry.greek }}</p>
         {% endif %}
       {% endfor %}
-
-    <!-- Show placeholder if there are no results -->
+      
+      <!-- Show placeholder if there are no results -->
     {% else %}
-      <p>Δεν βρέθηκε η λέξη στην βάση</p>
+      <p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξέτε ένα από τα επόμενα όρια:</p>
+      
+      <ul>
+      {% for suggestion in close_suggestions %}
+        <li>· <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a></li>
+      {% endfor %}
+    </ul>
     {% endif %}
-  
   </div>
 {% endblock %}

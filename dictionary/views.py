@@ -4,11 +4,10 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.shortcuts import redirect
 from .models import Entry
-import pandas as pd
-import numpy as np
 
 # Utils 
 from .src.extract_word_info import extract_word_info
+from .src.obtain_entry_suggestions import obtain_entry_suggestions
 
 # Create your views here.
  
@@ -71,24 +70,26 @@ def tsakonian(request,
     #         results = Entry.objects.filter(nowakowski = entry)
     #     case "kostakis":
     #         results = Entry.objects.filter(kostakis = entry)
-
     results = Entry.objects.filter(nowakowski = entry)
+
+    # Set the context
+    context = {
+        "tsakonian" : entry,
+    }
 
     # If there are results, build a list with the following format:
     # i. Greek word
     if results:
        greek_list = [entry for entry in results]
-       print(type(greek_list))
-       print(type(greek_list[0]))
+       context['greek_list'] = greek_list
     
     # Otherwise, return an empty list
     else:
-        greek_list = []
-    
-    context = {
-        "tsakonian" : entry,
-        "greek_list": greek_list,
-    }
+        # Extract full list of Tsakonian words
+        tsakonian_list = Entry.objects.all()
+        tsakonian_list = [entry.nowakowski for entry in tsakonian_list if isinstance(entry.nowakowski, str)]
+        close_suggestions = obtain_entry_suggestions(entry, tsakonian_list, threshold = 3)
+        context['close_suggestions'] = close_suggestions
 
     # If there is only one result, add the information on top of the page
     if len(results) == 1:

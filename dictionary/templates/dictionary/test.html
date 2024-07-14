@@ -1,0 +1,5 @@
+{% for suggestion in close_suggestions %}
+      -- Add a link to the suggestion
+      <p> {{ suggestion }}</p>
+            <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a>
+      {% endfor %}
