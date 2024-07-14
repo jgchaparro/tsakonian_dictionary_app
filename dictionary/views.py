@@ -13,7 +13,7 @@ from .src.obtain_entry_suggestions import obtain_entry_suggestions
  
 def index(request):
     # Load the template
-    template = loader.get_template("dictionary/index.html")
+    template = loader.get_template("dictionary/pages/index.html")
 
     # Set the context
     text_to_show = """
@@ -26,7 +26,7 @@ def index(request):
 
 def entry(request, entry):
     # Load the template
-    template = loader.get_template("dictionary/entry.html")
+    template = loader.get_template("dictionary/pages/entry.html")
 
     # Set the context
     tsakonian = entry
@@ -62,7 +62,7 @@ def tsakonian(request,
               entry,
               **kwargs):
     # Load the template
-    template = loader.get_template("dictionary/tsakonian.html")
+    template = loader.get_template("dictionary/pages/tsakonian.html")
 
     # Search for entries that contain the Greek word in the Greek column
     # match ortography:
@@ -117,7 +117,7 @@ def tsakonian(request,
 
 def greek(request, entry):
     # Load the template
-    template = loader.get_template("dictionary/greek.html")
+    template = loader.get_template("dictionary/pages/greek.html")
 
     # Set the context
     context = {
@@ -147,7 +147,7 @@ def greek(request, entry):
     
 def writing_extension(request):
     # Load the template
-    template = loader.get_template("dictionary/writing_extension.html")
+    template = loader.get_template("dictionary/pages/writing_extension.html")
 
     # Set the context
     context = {}

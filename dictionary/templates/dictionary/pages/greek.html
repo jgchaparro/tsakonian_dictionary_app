@@ -1,9 +1,10 @@
-{% extends "./base.html" %}
+{% extends "../base/base.html" %}
+
 
 {% block content %}
-<div class="translation">
-  <h1>{{ greek }}</h1>
+<h1>{{ greek }}</h1>
 
+<div class="translation">
   {% if tsakonian_list %}
       {% for entry in tsakonian_list %}
           <p>{{ entry }}</p>

@@ -1,0 +1,50 @@
+{% extends "../base/base.html" %}
+
+{% block content %}
+  
+  
+<h1>{{ tsakonian }}</h1>
+  
+<div class="main_info">
+  {% if top_info %}
+    <!-- Verb -->
+    <center>{% if ending %} Κατάληξη <span style="color: blue; font-weight: bold">{{ ending }}</span>{% endif %}</center>
+    <center>{% if orist_aoristos %} Αόρ. ορισ. <span style="color: blue; font-weight: bold">{{ orist_aoristos }}</span>{% endif %}{% if ypot_aoristos %}, αόρ. υποτ. <span style="color: blue; font-weight: bold">{{ ypot_aoristos }}{% endif %}</span></center>
+    <center>{% if ypot_enestotas %} Υποτ. ενεσ. <span style="color: blue; font-weight: bold">{{ ypot_enestotas }}</span>{% endif %}</center>
+
+    <!-- Νoun -->
+    <center>{% if gender %}<span style="color: blue; font-weight: bold">{{ gender }}</span>{% endif %}{% if plural %}, πλ. <span style="color: blue; font-weight: bold">{{ plural }}</span>{% endif %}</center>
+    {% if gen_sing %} <center> Γεν. <span style="color: blue; font-weight: bold">{{ gen_sing }}</span></center> {% endif %}
+    <!-- <center>[IPA]</center>  -->
+
+    <!-- Adjective -->
+    <center>{% if forms %}<span style="color: blue; font-weight: bold">{{ forms }}</span>{% endif %}</center>   
+  {% endif %}
+</div>
+ 
+<div class="translation">
+  <!-- Show results if they exist -->
+  {% if greek_list %}
+    {% for entry in greek_list %} 
+    <!-- If top info is activated, do not show notes -->
+      {% if top_info %}
+        <p>{{ forloop.counter }}) {{ entry.greek }}</p>
+
+      <!-- If top info is not activated, show notes -->
+      {% else %}
+      <p>{{ forloop.counter }}) <small><em style="color: blue;">{{ entry.notes }}</em></small> {{ entry.greek }}</p>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Show placeholder if there are no results -->
+  {% else %}
+    <p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξετε ένα από τα επόμενα όρια:</p>
+    
+    <ul>
+    {% for suggestion in close_suggestions %}
+      <li>· <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endblock %}

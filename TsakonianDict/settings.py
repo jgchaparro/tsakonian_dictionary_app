@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-=qmbw19)+^m653^vmtz3q0(ij)g!-p(day6s&g9(j2$utm%9i*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1'] # Dev
+# ALLOWED_HOSTS = ['127.0.0.1'] # Dev
 # ALLOWED_HOSTS = ['tsakoniandictionary.azurewebsites.net']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -119,7 +120,7 @@ USE_TZ = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = (str(BASE_DIR.joinpath('dictionary/static')),)
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_URL = '/dictionary/static/'
 
 # Default primary key field type
