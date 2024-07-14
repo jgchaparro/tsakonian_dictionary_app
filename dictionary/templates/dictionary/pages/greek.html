@@ -1,4 +1,4 @@
-{% extends "../base/base.html" %}
+{% extends "../base/base_greek.html" %}
 
 
 {% block content %}
@@ -14,7 +14,7 @@
       
       <ul>
       {% for suggestion in close_suggestions %}
-        <li>· <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a></li>
+        <li>· <a href="{% url 'dictionary:greek' suggestion %}">{{ suggestion }}</a></li>
       {% endfor %}
     </ul>
     {% endif %}
