@@ -120,25 +120,29 @@ def greek(request, entry):
     template = loader.get_template("dictionary/greek.html")
 
     # Set the context
-    greek = entry
+    context = {
+        "greek": entry,
+    }
 
     # Search for entries that contain the Greek word in the Greek column
-    reverse_results = Entry.objects.filter(greek = greek)
+    reverse_results = Entry.objects.filter(greek = entry)
 
     # If there are results, build a list with the following format:
     # Tsakonian word — Greek word
     if reverse_results:
-       tsakonian_list = [f'{entry.nowakowski} — {entry.greek}' for entry in reverse_results]
+        tsakonian_list = [f'{result.nowakowski} — {result.greek}' for result in reverse_results]
+        context['tsakonian_list'] = tsakonian_list
     
-    # Otherwise, return an empty list
+    # Otherwise, provide suggestions
     else:
-        tsakonian_list = []
-    
-    context = {
-        "greek": greek,
-        "tsakonian_list": tsakonian_list,
-    }
+        # Extract full list of Greek words
+        greek_list = Entry.objects.all()
+        greek_list = [entry.greek for entry in greek_list if isinstance(entry.greek, str)]
+        close_suggestions = obtain_entry_suggestions(entry, greek_list, threshold = 3)
+        context['close_suggestions'] = close_suggestions
 
+    print(context)
+        
     return HttpResponse(template.render(context, request))
     
 def writing_extension(request):

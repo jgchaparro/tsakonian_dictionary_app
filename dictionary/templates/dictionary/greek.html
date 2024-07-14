@@ -9,8 +9,14 @@
           <p>{{ entry }}</p>
       {% endfor %}
   {% else %}
-      <p>Δεν βρέθηκε η λέξη στην βάση</p>
-  {% endif %}
+      <p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξετε ένα από τα επόμενα όρια:</p>
+      
+      <ul>
+      {% for suggestion in close_suggestions %}
+        <li>· <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
 </div>
 {% endblock %}
