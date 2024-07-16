@@ -8,6 +8,5 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("TS-EL/<str:entry>", views.tsakonian, name="tsakonian"),
     path("EL-TS/<str:entry>", views.greek, name="greek"),
-    path("search/", views.search, name="search"),
     path("writing_extension/", views.writing_extension, name="writing_extension"),
 ]
