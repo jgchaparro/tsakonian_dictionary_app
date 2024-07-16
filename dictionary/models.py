@@ -33,6 +33,7 @@ class Entry(models.Model):
     kastanitsa = models.BooleanField(default=False, null = True)
     sitaina = models.BooleanField(default=False, null = True)
     prastos = models.BooleanField(default=False, null = True)
+    # date = models.DateField(auto_now_add=True)
     
     def __str__(self):
         return self.nowakowski
@@ -56,3 +57,11 @@ class Verb(models.Model):
 class Adjective(models.Model):
     paradigm = models.CharField(max_length=5, primary_key=True)
     forms = models.CharField(max_length=50)
+
+# To be added in text section:
+# class Text(models.Model):
+#     text = models.TextField()
+#     source_id = models.ForeignKey(Source, on_delete=models.CASCADE)
+#     greek_translation = models.TextField()
+#     english_translation = models.TextField()
+#     notes = models.TextField()
