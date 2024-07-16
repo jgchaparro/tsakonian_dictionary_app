@@ -4,13 +4,10 @@ from django.db import models
 class Source(models.Model):
     source_id = models.AutoField(primary_key=True, null=False, default=0)
     title = models.CharField(max_length=300)
-    name = models.CharField(max_length=50, blank=True)
-    surname = models.CharField(max_length=50, blank=True)
-    year = models.IntegerField(blank=True)
     url = models.CharField(max_length=200, blank=True, null=True)
     
     def __str__(self):
-        return f'{self.surname}, {self.name} ({self.year}) - {self.title}'
+        return f'{self.title}'
 
 class Entry(models.Model):
     nowakowski = models.CharField(max_length=50, primary_key=True)
