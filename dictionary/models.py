@@ -61,6 +61,7 @@ class Adjective(models.Model):
 # To be added in text section:
 # class Text(models.Model):
 #     text = models.TextField()
+#     title = models.CharField(max_length=200)
 #     source_id = models.ForeignKey(Source, on_delete=models.CASCADE)
 #     greek_translation = models.TextField()
 #     english_translation = models.TextField()
