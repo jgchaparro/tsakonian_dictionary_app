@@ -54,23 +54,29 @@ def search(request):
     if not request.GET.get('q'):
         return redirect('/dictionary/')
     
-    # Otherwise, redirect to the entry page
-    else:
-        return redirect(f'/dictionary/{direction}/{query}')
+    # Redirect to the appropriate page
+    match direction:
+        case "TS-EL":
+            return tsakonian(request, query, orthography)
+        case "EL-TS":
+            return greek(request, query, orthography)
+        case _:
+            raise ValueError("Invalid direction")
+    
+
 
 def tsakonian(request, 
-              entry,
-              **kwargs):
+              entry: str,
+              orthography: str = "nowakowski"):
     # Load the template
     template = loader.get_template("dictionary/pages/tsakonian.html")
 
     # Search for entries that contain the Greek word in the Greek column
-    # match ortography:
-    #     case "nowakowski":
-    #         results = Entry.objects.filter(nowakowski = entry)
-    #     case "kostakis":
-    #         results = Entry.objects.filter(kostakis = entry)
-    results = Entry.objects.filter(nowakowski = entry)
+    match orthography:
+        case "nowakowski":
+            results = Entry.objects.filter(nowakowski = entry)
+        case "kostakis":
+            results = Entry.objects.filter(kostakis = entry)
 
     # Set the context
     context = {
@@ -115,7 +121,9 @@ def tsakonian(request,
 
     return HttpResponse(template.render(context, request))
 
-def greek(request, entry):
+def greek(request: object, 
+          entry: str,
+          orthography: str = "nowakowski"):
     # Load the template
     template = loader.get_template("dictionary/pages/greek.html")
 
@@ -130,7 +138,11 @@ def greek(request, entry):
     # If there are results, build a list with the following format:
     # Tsakonian word — Greek word
     if reverse_results:
-        tsakonian_list = [f'{result.nowakowski} — {result.greek}' for result in reverse_results]
+        match orthography:
+            case "nowakowski":
+                tsakonian_list = [f'{result.nowakowski} — {result.greek}' for result in reverse_results]
+            case "kostakis":
+                tsakonian_list = [f'{result.kostakis} — {result.greek}' for result in reverse_results]
         context['tsakonian_list'] = tsakonian_list
     
     # Otherwise, provide suggestions
