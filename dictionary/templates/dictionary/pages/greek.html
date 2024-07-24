@@ -1,4 +1,4 @@
-{% extends "../base/base_greek.html" %}
+{% extends "../base/base.html" %}
 
 {% block title %}{{ greek }} - Τσακώνικο λεξικό{% endblock %}
 
@@ -11,14 +11,8 @@
           <p>{{ entry }}</p>
       {% endfor %}
   {% else %}
-      <p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξετε ένα από τα επόμενα όρια:</p>
-      
-      <ul>
-      {% for suggestion in close_suggestions %}
-        <li>· <a href="{% url 'dictionary:greek' suggestion %}">{{ suggestion }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+    {% include "../base/components/suggestions.html" %} 
+  {% endif %}
 
 </div>
 {% endblock %}

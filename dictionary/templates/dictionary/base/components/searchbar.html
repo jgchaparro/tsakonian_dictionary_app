@@ -49,6 +49,19 @@
   </script>
 
   <script>
+    const urlParams2 = new URLSearchParams(window.location.search);
+    const direction = urlParams2.get('direction');
+  
+    const radioButtons2 = document.querySelectorAll('input[name="direction"]');
+  
+    radioButtons2.forEach(radioButton2 => {
+      if (radioButton2.value === direction) {
+        radioButton2.checked = true;
+      }
+    });
+  </script>
+
+  <script>
     function pasteSh() {
       const searchBarInput = document.querySelector('input[name="q"]');
       searchBarInput.value = searchBarInput.value + "σ̌";

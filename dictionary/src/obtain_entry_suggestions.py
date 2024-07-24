@@ -4,7 +4,6 @@ import pandas as pd
 def obtain_entry_suggestions(input_string: str, 
                              list_of_strings: list, 
                              threshold: int = 2,
-                             orthography: str = 'nowakowski',
                              top_k: int = 10) -> list:
   """
   Generates search suggestions based on Levenshtein distance.

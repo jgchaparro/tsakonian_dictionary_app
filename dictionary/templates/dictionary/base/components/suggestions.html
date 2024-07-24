@@ -1,0 +1,7 @@
+<p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξετε ένα από τα επόμενα όρια:</p>
+    
+<ul>
+{% for suggestion in close_suggestions %}
+  <li>· <a href="{% url 'dictionary:search' %}?direction={{ direction }}&orthography={{ orthography }}&q={{ suggestion }}">{{ suggestion }}</a></li>
+{% endfor %}
+</ul>

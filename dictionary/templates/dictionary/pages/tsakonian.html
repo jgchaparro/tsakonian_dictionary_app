@@ -40,13 +40,7 @@
 
     <!-- Show placeholder if there are no results -->
   {% else %}
-    <p>Δεν βρέθηκε η λέξη στην βάση. Ίσως θέλατε να ψάξετε ένα από τα επόμενα όρια:</p>
-    
-    <ul>
-    {% for suggestion in close_suggestions %}
-      <li>· <a href="{% url 'dictionary:tsakonian' suggestion %}">{{ suggestion }}</a></li>
-    {% endfor %}
-  </ul>
+    {% include "../base/components/suggestions.html" %}
   {% endif %}
 </div>
 {% endblock %}

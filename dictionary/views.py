@@ -81,6 +81,8 @@ def tsakonian(request,
     # Set the context
     context = {
         "tsakonian" : entry,
+        "direction" : 'TS-EL',
+        "orthography" : orthography
     }
 
     # If there are results, build a list with the following format:
@@ -93,7 +95,11 @@ def tsakonian(request,
     else:
         # Extract full list of Tsakonian words
         tsakonian_list = Entry.objects.all()
-        tsakonian_list = [entry.nowakowski for entry in tsakonian_list if isinstance(entry.nowakowski, str)]
+        match orthography:
+            case 'nowakowski':
+                tsakonian_list = [entry.nowakowski for entry in tsakonian_list if isinstance(entry.nowakowski, str)]
+            case 'kostakis':
+                tsakonian_list = [entry.kostakis for entry in tsakonian_list if isinstance(entry.kostakis, str)]
         close_suggestions = obtain_entry_suggestions(entry, tsakonian_list, threshold = 3)
         context['close_suggestions'] = close_suggestions
 
@@ -130,6 +136,8 @@ def greek(request: object,
     # Set the context
     context = {
         "greek": entry,
+        "direction" : "EL-TS",
+        "orthography" : orthography
     }
 
     # Search for entries that contain the Greek word in the Greek column
@@ -150,7 +158,9 @@ def greek(request: object,
         # Extract full list of Greek words
         greek_list = Entry.objects.all()
         greek_list = [entry.greek for entry in greek_list if isinstance(entry.greek, str)]
-        close_suggestions = obtain_entry_suggestions(entry, greek_list, threshold = 3)
+        close_suggestions = obtain_entry_suggestions(entry, 
+                                                     greek_list, 
+                                                     threshold = 3)
         context['close_suggestions'] = close_suggestions
 
     print(context)
