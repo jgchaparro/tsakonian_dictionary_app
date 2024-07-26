@@ -63,8 +63,6 @@ def search(request):
         case _:
             raise ValueError("Invalid direction")
     
-
-
 def tsakonian(request, 
               entry: str,
               orthography: str = "nowakowski"):

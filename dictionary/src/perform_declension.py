@@ -1,21 +1,27 @@
 import pandas as pd
 import numpy as np
 import re
+from dictionary.models import NounParadigm
 
 def perform_declension(word: str, 
-                       paradigm: str,
-                       paradigm_master: pd.DataFrame) -> dict:
+                       paradigm: str) -> dict:
     """
     This function extracts the gender and plural of a given noun
     based on the paradigm taxonomy described in the PDF
     Συμπυκνωμένη γραμματική της Τσακώνικης γλώσσας σε πίνακες
     """
-
+    # Return empty dictionary is paradigm is empty
     if re.match(r'^[ΑΘΥ]([0-9])?$', paradigm) is None:
         return {}
-    
-    # Create empty information dict
-    info_dict = {}
+
+    # Create empty results dict
+    results_dict = {}
+
+    ### Get paradigm info ###
+    key = paradigm if '0' not in paradigm else word
+    paradigm_info = NounParadigm.objects.filter(paradigm = key)
+    paradigm_info = pd.DataFrame(list(paradigm_info.values())).loc[0]
+    paradigm_info = paradigm_info.dropna() # Keep only non-null values
     
     ### Gender ###
     gender_dict = {
@@ -23,38 +29,31 @@ def perform_declension(word: str,
         'Θ' : 'α',
         'Υ' : 'το'
     }
-    info_dict['gender'] = gender_dict[paradigm[0]]
+    results_dict['gender'] = gender_dict[paradigm[0]]
     
-    ### Plural and genitive ###
-    if '0' not in paradigm: # Regular paradigms
-        row = paradigm_master.loc[paradigm]
-    else: # Irregular paradigms
-        row = paradigm_master.loc[word]
-    
-    try:
-        if row['plural'] is not np.nan:
-            info_dict['plural'] = row['plural']
-        if row['gen_sing'] is not np.nan:
-            info_dict['gen_sing'] = row['gen_sing'] 
-    except KeyError:
-        pass
+    ### Plural and genitive ###   
+    if 'plural' in paradigm_info.keys():
+        results_dict['plural'] = paradigm_info['plural']
+
+    if 'gen_sing' in paradigm_info.keys():
+        results_dict['gen_sing'] = paradigm_info['gen_sing']
 
     ### Add irregular feminine genitives ###
-    if info_dict['gender'] == 'α' and '0' not in paradigm:
-        femenine_genitives = paradigm_master[paradigm_master['type'] == 'femenine_genitives']
-        if word in femenine_genitives.index:
-            info_dict['gen_sing'] = femenine_genitives.loc[word, 'gen_sing']
+    if results_dict['gender'] == 'α' and '0' not in paradigm:
+        femenine_genitive_query = NounParadigm.objects.filter(type = 'femenine_genitives', paradigm = word)
+        if len(femenine_genitive_query) > 0:
+            results_dict['gen_sing'] = femenine_genitive_query[0].gen_sing
 
     ### Generate notes ###
     # Create base
-    notes = info_dict['gender']
+    notes = results_dict['gender']
 
-    if 'plural' in info_dict.keys():
-        notes += f', πλ. {info_dict["plural"]}'
-    if 'gen_sing' in info_dict.keys():
-        notes += f', γεν. {info_dict["gen_sing"]}'
+    if 'plural' in results_dict.keys():
+        notes += f', πλ. {results_dict["plural"]}'
+    if 'gen_sing' in results_dict.keys():
+        notes += f', γεν. {results_dict["gen_sing"]}'
 
     # Add notes to info_dict
-    info_dict['notes'] = notes
+    results_dict['notes'] = notes
 
-    return info_dict    
+    return results_dict    

@@ -1,4 +1,3 @@
-import pandas as pd
 from .perform_declension import perform_declension
 from .perform_conjugation import perform_conjugation
 from .perform_adjective_declension import perform_adjective_declension
@@ -23,39 +22,14 @@ def extract_word_info(word: str,
         return {}
     
     ### Nouns ###
-    if word_type == 'noun':
-        # Read paradigm master table
-        filepath = 'data/tables/Nouns.xlsx'
-        paradigm_master = pd.read_excel(filepath).set_index('paradigm')
+    info_functions = {
+        'noun' : perform_declension,
+        'verb' : perform_conjugation,
+        'adjective' : perform_adjective_declension
+    }
+    info_dict = info_functions[word_type](word, paradigm)
 
-        # Perform declension
-        info_dict = perform_declension(word, paradigm, paradigm_master)
-
-        # Debug
-        print(f'Declination: {info_dict}')
-
-    elif word_type == 'verb':
-        # Read paradigm master table
-        filepath = 'data/tables/Verbs.xlsx'
-        paradigm_master = pd.read_excel(filepath)
-        paradigm_master.set_index(['paradigm', 'ending'], inplace=True)
-
-        # Perform conjugation
-        info_dict = perform_conjugation(word, paradigm, paradigm_master)
-
-        # Debug
-        print(f'Conjugation: {info_dict}')
-
-    ### Adjectives ###
-    elif word_type == 'adjective':
-        # Read paradigm master table
-        filepath = 'data/tables/Adjectives.xlsx'
-        paradigm_master = pd.read_excel(filepath).set_index('paradigm')
-
-        # Perform declension
-        info_dict = perform_adjective_declension(word, paradigm, paradigm_master)
-
-        # Debug
-        print(f'Forms: {info_dict}')
+    # Debug
+    print(f'Information dictionary: {info_dict}')
 
     return info_dict

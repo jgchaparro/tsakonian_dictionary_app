@@ -1,8 +1,8 @@
 import pandas as pd
+from dictionary.models import VerbParadigm
 
 def perform_conjugation(verb: str,
-                        paradigm: str,
-                        paradigm_master: pd.DataFrame) -> dict:
+                        paradigm: str) -> dict:
     
     """
     Extracts the conjugation endings 
@@ -11,19 +11,20 @@ def perform_conjugation(verb: str,
 
     ### Irregular paradigms ###
     if paradigm == "Ρ0":
-        conjugation_info = paradigm_master.loc[(verb, 'irr')].dropna().to_dict()
+        conjugation_info = VerbParadigm.objects.filter(paradigm = verb)
+        conjugation_info = pd.DataFrame(list(conjugation_info.values())).loc[0].dropna().to_dict()                           
 
     elif paradigm == "Ρ":
-        conjugation_info = {}        
+        conjugation_info = {}
     
     else:
         ### Regular paradigms ###
         # Get paradigm subset
-        paradigm_subset = paradigm_master.loc[paradigm]
-
-        # Extract specific subset
-        endings_list = paradigm_subset.index.tolist()
-
+        # paradigm_subset = paradigm_master.loc[paradigm]
+        paradigm_subset = VerbParadigm.objects.filter(paradigm = paradigm)
+        # Extract ending column   
+        endings_list = [verb_paradigm.ending for verb_paradigm in paradigm_subset]
+        
         # Detect the ending
         for ending_str in endings_list:
             if verb.endswith(ending_str):
@@ -31,7 +32,8 @@ def perform_conjugation(verb: str,
                 break
 
         # Extract conjugation information
-        conjugation_info = paradigm_subset.loc[ending].dropna().to_dict()
+        conjugation_info = VerbParadigm.objects.filter(paradigm = paradigm, ending = ending)
+        conjugation_info = pd.DataFrame(list(conjugation_info.values())).loc[0].dropna().to_dict()
 
         # Update conjugation with ending
         conjugation_info['ending'] = f'-{ending}'
