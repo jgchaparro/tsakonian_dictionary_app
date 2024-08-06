@@ -1,23 +1,24 @@
 <form method="GET" action="{% url 'dictionary:search' %}">
-    <div class="radio-buttons">
-      <input type="radio" name="direction" id="direction-ts-el" value="TS-EL" checked>
-      <label for="direction-ts-el">ΤΣ-ΕΛ</label>
-  
-      <input type="radio" name="direction" id="direction-el-ts" value="EL-TS">
-      <label for="direction-el-ts">ΕΛ-ΤΣ</label>
-    </div>
+    <div name="search-options" class="radio-buttons">
+      <div name="direction">
+        <input type="radio" name="direction" id="direction-ts-el" value="TS-EL" checked>
+        <label for="direction-ts-el">ΤΣ-ΕΛ</label>
+    
+        <input type="radio" name="direction" id="direction-el-ts" value="EL-TS">
+        <label for="direction-el-ts">ΕΛ-ΤΣ</label>
+      </div>
 
-    <div class="radio-buttons">
-      <input type="radio" name="orthography" id="orthography-kos" value="kostakis" checked>
-      <label for="orthography-kos">Κωστάκης</label>
+      <div name="orthography-options">
+        <input type="radio" name="orthography" id="orthography-kos" value="kostakis" checked>
+        <label for="orthography-kos">Κωστάκης</label>
 
-      <input type="radio" name="orthography" id="orthography-now" value="nowakowski"> 
-      <label for="orthography-now">Νοβακόφσκι</label>
-  
+        <input type="radio" name="orthography" id="orthography-now" value="nowakowski"> 
+        <label for="orthography-now">Νοβακόφσκι</label>
+      </div>
     </div>
   
     <div class="search-bar">
-      <input type="text" name="q" class="search-bar" placeholder="Αναζήτηση">
+      <input type="text" name="q" placeholder="Αναζήτηση">
       <button type="submit">Υποβολή</button>
     </div>
 
