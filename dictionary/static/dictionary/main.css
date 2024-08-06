@@ -1,6 +1,7 @@
 body {
     background-color: #FFF;
     font-family: Calibri;
+    margin: 100px;
   }
  
 .logo {
@@ -9,8 +10,8 @@ body {
 }
 
 .radio-buttons {
-  padding-left: 20%;
   margin-top: 20px;
+  text-align: center;
 }
 
 .search-bar {
@@ -42,16 +43,16 @@ body {
 }
 
 .letter-buttons {
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 .letter-buttons button {
   font-family: Calibri;
-  font-size: 20px;
-  padding: 10px;
-  font-weight: 600;
+  font-size: 15px;
+  padding: 8px;
+  font-weight: bold;
 }
 
 .index_text, .translation{
@@ -86,6 +87,7 @@ ul li a:hover {
 .main_info {
   font-family: Calibri;
   padding-left: 0%;
+  font-size: 20px;
 }
 
 .translation {
