@@ -94,3 +94,7 @@ ul li a:hover {
   font-family: Calibri;
   font-size: 25px; 
 }
+
+.map-widget {
+  text-align: center;
+}

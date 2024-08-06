@@ -2,14 +2,24 @@
  
 {% block content %}
 <div class = "index_text">
-    <h2>Καούρ εκάνατε το πρώκιου ηλεκτρονικό Τσακώνικο λεξικό!</h2>
+    <p><h2>Καούρ εκάνατε το πρώκιου ηλεκτρονικό Τσακώνικο λεξικό!</h2></p>
 
     <p>Αυτό το λεξικό αποτελεί μέρος των προσπαθειών συντήρησης της Τσακώνικης διαλέκτου. </p>
 
     <p>Το λεξικό αυτό είναι ανοιχτό σε όλους και όλες και οποιοσδήποτε μπορεί να συνεισφέρει στην εμπλουτισμό του.</p>
 
-    </p>Αν θέλετε να συνεισφέρετε, παρακαλούμε επικοινωνήστε μαζί μας στο <a href="mailto:tsakoniandigital@gmail.com">tsakoniandigital@gmail.com</a> ή στο <a href="mailto:jgchaparro@outlook.com">jgchaparro@outlook.com</a></p>
+    <p>Αν θέλετε να συνεισφέρετε, παρακαλούμε επικοινωνήστε μαζί μας στο <a href="mailto:tsakoniandigital@gmail.com">tsakoniandigital@gmail.com</a> ή στο <a href="mailto:jgchaparro@outlook.com">jgchaparro@outlook.com</a></p>
 
-    <center><a href="{% url 'dictionary:writing_extension' %}">Εγκαταστήστε εδώ την επέκταση πληκτρολογίου για την Τσακωνική διάλεκτο</a></center>
-{% endblock %}
+    
 </div>
+
+<div name = "links" class="index_text">
+    <h2>Σύδεσμοι</h2>
+
+    <ol>
+        <li><a href="{% url 'dictionary:preservation_strategy' %}">Σχέδιο συντήρησης Τσακώνικης διαλέκτου με τεχνητή νοημοσύνη</a></li>
+        <li><a href="{% url 'dictionary:writing_extension' %}">Τσακωνική επέκταση πληκτρολογίου</a></li>
+    </ol>
+    
+</div>
+{% endblock %}

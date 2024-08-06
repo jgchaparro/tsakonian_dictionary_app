@@ -9,8 +9,6 @@ from .models import Entry
 from .src.extract_word_info import extract_word_info
 from .src.obtain_entry_suggestions import obtain_entry_suggestions
 
-# Create your views here.
- 
 def index(request):
     # Load the template
     template = loader.get_template("dictionary/pages/index.html")
@@ -168,6 +166,15 @@ def greek(request: object,
 def writing_extension(request):
     # Load the template
     template = loader.get_template("dictionary/pages/writing_extension.html")
+
+    # Set the context
+    context = {}
+
+    return HttpResponse(template.render(context, request))
+
+def preservation_strategy(request):
+        # Load the template
+    template = loader.get_template("dictionary/pages/preservation_strategy.html")
 
     # Set the context
     context = {}
